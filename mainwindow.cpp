@@ -1,5 +1,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QKeyEvent> // Нажатия кнопок на клавиатуре
+#include <QDebug> // Вывод в отладочную консоль
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "about.h"
@@ -60,3 +62,32 @@ void MainWindow::on_gameSettings_triggered() {
   GameSettings form(this, settings);
   form.exec();
 }
+
+// При нажатии на кнопку на клавиатуре
+void MainWindow::keyPressEvent(QKeyEvent* event) {
+  switch (event->key()) {
+    case Qt::Key_Left: // Двигаем фигуру влево
+      qDebug() << "Left";
+      break;
+
+    case Qt::Key_Right: // Двигаем фигуру вправо
+      qDebug() << "Right";
+      break;
+
+    case Qt::Key_Down: // Приземляем фигуру
+      qDebug() << "Down - landed figure";
+      break;
+
+    case Qt::Key_Up: // Поворачиваем фигуру
+      qDebug() << "Up - rotate";
+      break;
+
+    case Qt::Key_Space: // Пробел - пауза
+      qDebug() << "Game pause";
+      break;
+  }
+
+  // Вызываем стандартный обработчик нажатий
+  QMainWindow::keyPressEvent(event);
+}
+

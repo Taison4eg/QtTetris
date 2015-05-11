@@ -16,6 +16,10 @@ class MainWindow : public QMainWindow {
   explicit MainWindow(QWidget* parent = 0);
   ~MainWindow();
 
+ protected:
+  // При нажатии кнопки на клавиатуре
+  void keyPressEvent(QKeyEvent* event);
+
  private slots:
   void on_about_triggered();
 
